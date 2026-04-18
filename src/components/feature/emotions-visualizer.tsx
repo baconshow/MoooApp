@@ -1,0 +1,1 @@
+// Componente descontinuado - Three.js removido para otimização v2.0

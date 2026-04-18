@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 250 60% 55%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 250 60% 55%;
+    --radius: 0.5rem;
+    
+    --chart-1: 340 80% 65%;
+    --chart-2: 260 80% 70%;
+    --chart-3: 50 90% 60%;
+    --chart-4: 170 70% 50%;
+    --chart-5: 200 80% 60%;
+
+    --border-color-1: 307 100% 50%; /* #ff00cc */
+    --border-color-2: 48 100% 50%; /* #ffcc00 */
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 240 5% 95%;
+    --card: 240 6% 12%;
+    --card-foreground: 240 5% 95%;
+    --popover: 240 6% 12%;
+    --popover-foreground: 240 5% 95%;
+    --primary: 250 60% 65%;
+    --primary-foreground: 250 60% 15%;
+    --secondary: 240 5% 18%;
+    --secondary-foreground: 240 5% 95%;
+    --muted: 240 5% 18%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 250 50% 55%;
+    --accent-foreground: 240 5% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 4% 18%;
+    --input: 240 4% 18%;
+    --ring: 250 60% 65%;
+    --radius: 0.5rem;
+    
+    --chart-1: 340 80% 65%;
+    --chart-2: 260 80% 70%;
+    --chart-3: 50 90% 60%;
+    --chart-4: 170 70% 50%;
+    --chart-5: 200 80% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--ring) / 0.8);
+  }
+}
+
+@layer components {
+  .claymorphism {
+    @apply rounded-2xl border;
+  }
+  .dark .claymorphism {
+    @apply border-white/10 bg-black/20;
+    box-shadow: 
+      0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer utilities {
+  .animated-gradient-border {
+    position: relative;
+    padding: 2px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .dark .animated-gradient-border::before {
+    background: conic-gradient(
+      from var(--angle),
+      hsl(var(--primary) / 0.8),
+      hsl(var(--accent) / 0.8),
+      hsl(var(--chart-1) / 0.8),
+      hsl(var(--accent) / 0.8),
+      hsl(var(--primary) / 0.8)
+    );
+  }
+
+  .light .animated-gradient-border::before {
+      background: conic-gradient(
+      from var(--angle),
+      hsl(var(--border-color-1) / 0.9),
+      hsl(var(--border-color-2) / 0.9),
+      hsl(var(--border-color-1) / 0.9)
+    );
+  }
+  
+  .animated-gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    animation: rotate 4s linear infinite;
+    z-index: 1;
+  }
+
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  .animated-gradient-border-send {
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    @apply rounded-md text-primary-foreground;
+  }
+
+  /* Ambient Blobs Animations */
+  @keyframes blob-float-1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -20px) scale(1.05);
+    }
+    66% {
+      transform: translate(-15px, 15px) scale(0.95);
+    }
+  }
+
+  @keyframes blob-float-2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-25px, 20px) scale(0.95);
+    }
+    66% {
+      transform: translate(20px, -15px) scale(1.05);
+    }
+  }
+
+  .animate-blob-float-1 {
+    animation: blob-float-1 20s ease-in-out infinite;
+  }
+
+  .animate-blob-float-2 {
+    animation: blob-float-2 25s ease-in-out infinite;
+  }
+}
+
+.slider-thick > span:first-of-type {
+  height: 12px;
+}
+.slider-thick > span:first-of-type > span {
+  background-color: var(--slider-track-color, hsl(var(--primary)));
+}
+ .slider-thick > span:last-of-type {
+    height: 24px;
+    width: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
