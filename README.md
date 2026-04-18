@@ -21,8 +21,6 @@ A full-stack wellness application featuring an AI-powered companion, health trac
 
 **Financial Management (Grana)** — Income/expense tracking, savings goals, loan calculator, and transaction history with filtering.
 
-**Creative Space** — Free-form journaling and finger-drawing canvas for emotional expression.
-
 ---
 
 ## Tech Stack
